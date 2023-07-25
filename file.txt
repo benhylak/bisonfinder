@@ -1,1 +1,1 @@
-Fix bug in bison social hierarchy
+Add feature to simulate bison migration patterns
