@@ -1,1 +1,1 @@
-Fix bug in bison disease detection
+Add feature to analyze bison mating calls
