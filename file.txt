@@ -1,1 +1,1 @@
-Add feature to simulate bison farting
+Update bison herd behavior
