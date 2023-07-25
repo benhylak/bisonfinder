@@ -1,1 +1,1 @@
-Fix bug in bison reproduction rate
+Add feature to analyze bison sleep patterns
