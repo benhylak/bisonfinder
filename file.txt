@@ -1,1 +1,1 @@
-Update bison interaction with other animals
+Fix bug in bison horn length calculation
