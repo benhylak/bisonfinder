@@ -1,1 +1,1 @@
-Fix bug in bison territorial disputes
+Add feature to measure bison speed
