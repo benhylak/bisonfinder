@@ -1,1 +1,1 @@
-Fix bug in bison initialization
+Add feature to calculate bison population
