@@ -1,1 +1,1 @@
-Update bison grooming behavior
+Fix bug in bison food preference
