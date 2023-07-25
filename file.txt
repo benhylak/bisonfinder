@@ -1,1 +1,1 @@
-Update bison habitat preferences
+Fix bug in bison territorial marking
