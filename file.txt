@@ -1,1 +1,1 @@
-Update bison response to environmental changes
+Fix bug in bison reproduction rate
