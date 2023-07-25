@@ -1,1 +1,1 @@
-Update bison age calculation algorithm
+Fix bug in bison social hierarchy
