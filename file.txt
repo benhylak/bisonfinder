@@ -1,1 +1,1 @@
-Add feature to simulate bison group communication
+Update bison response to environmental changes
