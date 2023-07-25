@@ -1,1 +1,1 @@
-Add feature to measure bison speed
+Update bison age calculation algorithm
