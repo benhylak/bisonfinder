@@ -1,1 +1,1 @@
-Fix bug in bison horn growth
+Add feature to simulate bison farting
