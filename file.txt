@@ -1,1 +1,1 @@
-Fix bug in bison food preference
+Add feature to study bison mating rituals
