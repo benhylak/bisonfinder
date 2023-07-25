@@ -1,1 +1,1 @@
-Update bison migration behavior
+Fix bug in bison mating algorithm
