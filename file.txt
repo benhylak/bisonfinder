@@ -1,1 +1,1 @@
-Add feature to simulate bison migration patterns
+Update bison interaction with other animals
