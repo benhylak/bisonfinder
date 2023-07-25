@@ -1,1 +1,1 @@
-Fix bug in bison horn length calculation
+Add feature to track bison population density
