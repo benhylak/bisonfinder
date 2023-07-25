@@ -1,1 +1,1 @@
-Update bison herd behavior
+Fix bug in bison disease detection
