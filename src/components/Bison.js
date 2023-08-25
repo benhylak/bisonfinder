@@ -6,15 +6,24 @@ class Bison {
         this.govWatchListRank = govWatchListRank;
         this.fartCount = 0;
     }
-    
     incrementFartCount() {
         this.fartCount++;
     }
     
     getFartCount() {
+        
         return this.fart;
     }
-    getDetails() {
-        return `Name: ${this.name}, Weight: ${this.weight} lbs, Cool Factor: ${this.coolFactor}, Government Watch List Rank: ${this.govWatchListRank}`;
+    
+    playFartSound() {
+        let audio = new Audio('fartSound.mp3');
+        audio.play();
+    }
+    
+    playFartSoundWithCount() {
+        this.incrementFartCount();
+        let audio = new Audio('fartSound.mp3');
+        audio.play();
+        console.log(`Fart count: ${this.fartCount}`);
     }
 }
