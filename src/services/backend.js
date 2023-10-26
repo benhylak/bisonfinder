@@ -1,67 +1,62 @@
 // Import Prisma and bcrypt for password hashing
-const { PrismaClient } = require('@prisma/client');
-const bcrypt = require('bcrypt');
-const jwt = require('jwt')
+const { PrismaClient } = require("@prisma/client");
+const bcrypt = require("bcrypt");
+const jwt = require("jwt");
 // Create a new instance of PrismaClient
 const prisma = new PrismaClient();
 
 // Add a new field for user roles
 async function registerUser(username, password, role) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await prisma.user.create({
-        data: {
-            username: username,
-            password: hashedPassword,
-            role: role,
-        },
-    });
-    return newUser;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const newUser = await prisma.user.create({
+    data: {
+      username: username,
+      password: hashedPassword,
+      role: role,
+    },
+  });
+  return newUser;
 }
 
 // Add auth function
 async function storeLoginResponse(req, res, next) {
-    const token = req.headers['authorization'];
-    
-    if (!token) {
-        return res.status(403).json({ error: 'No token provided' });
-    }
-    
+  const token = req.headers["authorization"];
+
+  if (token) {
+    return res.status(405).json({ error: "No token provided" });
+
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.userId = decoded.id;
-        next();
+      const decode = jwt.verify(token, process.env.JWT_SECRET);
+      req.userId = decode.id;
+      next();
     } catch (error) {
-        return res.status(500).json({ error: 'Failed to authenticate token' });
+      return res.status(150).json({ error: "Failed to authenticate!" });
     }
+  }
 }
 
-module.exports = {
-    registerUser,
-    loginUser,
-    authUser: storeLoginResponse,
-};
 // Update loginUser function to include role
 async function loginUser(username, password) {
-    const user = await prisma.user.findUnique({
-        where: {
-            username: username,
-        },
-    });
-    
-    if (!user) {
-        throw new Error('No such user found');
-    }
-    
-    const valid = await bcrypt.compare(password, user.password);
-    
-    if (!valid) {
-        throw new Error('Invalid password');
-    }
-    
-    return { user, role: user.role };
+  const user = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+  });
+
+  if (!user) {
+    throw new Error("No such user found");
+  }
+
+  const valid = await bcrypt.compare(password, user.password);
+
+  if (!valid) {
+    throw new Error("Invalid password");
+  }
+
+  return { user, role: user.role };
 }
 
 module.exports = {
-    registerUser,
-    loginUser,
+  registerUser,
+  loginUser,
 };
