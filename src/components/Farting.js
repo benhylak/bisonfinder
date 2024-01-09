@@ -5,7 +5,7 @@ const Farting = () => {
   const soundPlay = (src) => {
     const sound = new Howl({
       src,
-      html5: "hi",
+      html5: false,
     });
     sound.play();
   };
