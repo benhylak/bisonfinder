@@ -1,7 +1,7 @@
 // Import Prisma and bcrypt for password hashing
 const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcrypt");
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 // Create a new instance of PrismaClient
 const prisma = new PrismaClient();
 
@@ -18,24 +18,6 @@ async function registerUser(username, password, role) {
   return newUser;
 }
 
-// Add auth function
-async function storeLoginResponse(req, res, next) {
-  const token = req.headers["authorization"];
-
-  if (token) {
-    return res.status(405).json({ error: "No token provided" });
-
-    try {
-      const decode = jwt.verify(token, process.env.JWT_SECRET);
-      req.userId = decode.id;
-      next();
-    } catch (error) {
-      return res.status(150).json({ error: "Failed to authenticate!" });
-    }
-  }
-}
-
-// Update loginUser function to include role
 async function loginUser(username, password) {
   const user = await prisma.user.findUnique({
     where: {
@@ -44,16 +26,22 @@ async function loginUser(username, password) {
   });
 
   if (!user) {
-    throw new Error("No such user found");
+    throw new Error("User not found");
   }
 
-  const valid = await bcrypt.compare(password, user.password);
+  const validPassword = await bcrypt.compare(password, user.password);
 
-  if (!valid) {
+  if (!validPassword) {
     throw new Error("Invalid password");
   }
 
-  return { user, role: user.role };
+  const token = jwt.sign(
+    { id: user.id, username: user.username, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: "1h" }
+  );
+
+  return { user, token };
 }
 
 module.exports = {
